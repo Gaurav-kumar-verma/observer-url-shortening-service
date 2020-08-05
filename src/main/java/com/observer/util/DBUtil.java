@@ -9,16 +9,20 @@ import com.observer.exception.AppRuntimeException;
 
 public class DBUtil {
 	
-	private static  Map<String,List<Long>> urlStatus = new HashMap<>();
+	public static  Map<String,List<Long>> urlStatus = new HashMap<>();
 
-	private static Map<String,String> urlMap =  new HashMap<>();
+	public static Map<String,String> urlMap =  new HashMap<>();
 	
-	private static Map<String,Long> stats =  new HashMap<>();
+	public static Map<String,Long> stats =  new HashMap<>();
 	
 	public static void save(String shortUrl , String longUrl){
 		
 		urlMap.put(shortUrl , longUrl);
 		
+	}
+	
+	public static String fetch(String shortUrl) {
+		return urlMap.get(shortUrl);
 	}
 	
 	public static String fetch(String shortUrl , Long clientId) {

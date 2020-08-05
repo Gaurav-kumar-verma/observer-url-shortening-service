@@ -12,6 +12,7 @@ import com.observer.request.USSRequest;
 import com.observer.response.USSResponse;
 import com.observer.service.URLShorteningService;
 import com.observer.util.AppUtil;
+import com.observer.util.DBUtil;
 import com.observer.util.ErrorUtil;
 
 @Service
@@ -30,7 +31,12 @@ public class UrlShorteningServiceImpl implements URLShorteningService {
 		
 		String longUrl = request.getLongUrl();
 		// convert into short URL
-		String shortUrl = AppUtil.convertToShortUrl(longUrl);
+		String dbUrl = null;
+		String shortUrl = null;
+		shortUrl = AppUtil.convertToShortUrl(longUrl);
+		dbUrl = DBUtil.fetch(shortUrl);
+		
+		
 		urlShortenRepository.save(shortUrl, longUrl);
 		
 		return new USSResponse(shortUrl);

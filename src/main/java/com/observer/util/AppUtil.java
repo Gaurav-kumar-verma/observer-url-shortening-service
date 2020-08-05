@@ -4,6 +4,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.xml.bind.DatatypeConverter;
 
@@ -33,23 +34,17 @@ public class AppUtil {
 		return builder.toString();
 	}
 	
-//	public static int getBase10(String base64){
-//		int val = 0;
-//		for(int i=0; i<base64.length(); i++){
-//			val = val + (int) ( (base64CharMap.get(base64.charAt(i)))* Math.pow(64, base64.length()-i-1));
-//		}
-//		return val;
-//	}
-	
 	public static String convertToShortUrl(String longUrl) throws NoSuchAlgorithmException{
 		
-		 MessageDigest md = MessageDigest.getInstance("MD5");
-		 md.update(longUrl.getBytes());
-		 byte[] digest = md.digest();
-		 String md5hash = DatatypeConverter
-			      .printHexBinary(digest).toUpperCase();
+//		 MessageDigest md = MessageDigest.getInstance("MD5");
+//		 md.update(longUrl.getBytes());
+//		 byte[] digest = md.digest();
+//		 String md5hash = DatatypeConverter
+//			      .printHexBinary(digest).toUpperCase();
+		
+		UUID uudi = UUID.nameUUIDFromBytes(longUrl.getBytes());
 		 
-		 String secureShortenUrl = get_SHA_1_SecurePassword(md5hash);
+		 String secureShortenUrl = get_SHA_1_SecurePassword(String.valueOf(uudi));
 		 
 		 return secureShortenUrl.substring(0,8);
 		
